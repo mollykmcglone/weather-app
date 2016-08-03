@@ -1,5 +1,5 @@
 var Temperature = require('./../js/temperature.js').temperatureModule;
-var apiKey = "58f98fa230bebc4429c67f63eb29c0d3";
+var apiKey = require('./../.env').apiKey;
 
 $(document).ready(function() {
 
