@@ -3,7 +3,6 @@ var apiKey = "58f98fa230bebc4429c67f63eb29c0d3";
 $(document).ready(function() {
   $('#humidityLocation').click(function() {
     var city = $('#location').val();
-    $('#location').val("");
     $.get('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey).then(function(response) {
       $('.showHumidity').text("The humidity in " + city + " is " + response.main.humidity + "%");
       console.log(response);
@@ -17,14 +16,24 @@ var Temperature = require('./../js/temperature.js').temperatureModule;
 var apiKey = "58f98fa230bebc4429c67f63eb29c0d3";
 
 $(document).ready(function() {
-  $('#tempLocation').click(function() {
+
+  $('#tempCelsius').click(function() {
     var city = $('#location').val();
     var ourTemperature = new Temperature();
-    $('#location').val("");
     $.get('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey).then(function(response) {
-        $('.showTemp').text("The temperature in " + city + " is " + ourTemperature.convertTemp(response.main.temp)[0] + " degrees Celsius and " + ourTemperature.convertTemp(response.main.temp)[1] + " degrees Fahrenheit.");
+        $('.showCelsius').text("The temperature in " + city + " is " + ourTemperature.convertToCelsius(response.main.temp) + " degrees Celsius. ");
       }).fail(function(error) {
-        $('.showTemp').text(error.responseJSON.message);
+        $('.showCelsius').text(error.responseJSON.message);
+    });
+  });
+
+  $('#tempFahrenheit').click(function() {
+    var city = $('#location').val();
+    var ourTemperature = new Temperature();
+    $.get('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey).then(function(response) {
+        $('.showFahrenheit').text("The temperature in " + city + " is " + ourTemperature.convertToFahrenheit(response.main.temp) + " degrees Fahrenheit.");
+      }).fail(function(error) {
+        $('.showFahrenheit').text(error.responseJSON.message);
     });
   });
 });

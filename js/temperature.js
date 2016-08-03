@@ -1,12 +1,15 @@
 function Temperature () {
 }
 
-Temperature.prototype.convertTemp = function(tempKelvin) {
-  var response = [];
+Temperature.prototype.convertToCelsius = function(tempKelvin) {
+  var celsius = (tempKelvin - 273.15).toFixed(2);
+  return celsius;
+};
+
+Temperature.prototype.convertToFahrenheit = function(tempKelvin) {
   var celsius = (tempKelvin - 273.15).toFixed(2);
   var fahrenheit = ((celsius * 1.8) + 32).toFixed(2);
-  response.push(celsius, fahrenheit);
-  return response;
+  return fahrenheit;
 };
 
 exports.temperatureModule = Temperature;
